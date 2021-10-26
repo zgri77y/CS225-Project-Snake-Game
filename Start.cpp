@@ -22,6 +22,7 @@ int y = 6;
 int nmin = 0;
 int apple_x = 10;
 int apple_y = 10; 
+int score = 0;
 
 void appleLocation() {
 	apple_x = rand() % 13 + 1;
@@ -91,6 +92,8 @@ int main() {
 
 void board() {
 	system("CLS");
+
+	cout << "Score: " << score << endl; 
 	
 	cout << "||||||||||||||||||||||" << endl;
 	for (int i = 0; i < 15; i++) {
@@ -114,6 +117,7 @@ void board() {
 	cout << "||||||||||||||||||||||" << endl;
 	if ((apple_x == y) && (apple_y == x)) {
 		cout << "You ate the apple" << endl;
+		score++; 
 		appleLocation();
 	}
 }
