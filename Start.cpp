@@ -56,12 +56,6 @@ int y = 6;
 int nmin = 0; 
 int score = 0;
 
-/*void appleLocation() {
-	apple_x = rand() % 13 + 1;
-	apple_y = rand() % 18 + 1;
-
-}; */
-
 void board(Apple& a1);
 
 int main() {
@@ -75,7 +69,6 @@ int main() {
 	system("CLS");
 
 	srand(time(NULL));
-	//appleLocation(); 
 
 	board(a1);
 
@@ -158,5 +151,6 @@ void board(Apple& a1) {
 	}
 	
 }
+
 
 
