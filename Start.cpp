@@ -8,6 +8,8 @@
 #include <cctype>
 #include <climits>
 #include <time.h>
+#include <fstream>
+#include <iostream>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -17,24 +19,55 @@
 
 using namespace std;
 
+
+
+class Apple {
+
+private:
+	int apple_x = 10;
+	int apple_y = 10; 
+
+public:
+
+	int getApple_X() {
+		return apple_x;
+	}
+
+	int getApple_Y() {
+		return apple_y;
+	}
+
+	Apple() {
+		apple_x = rand() % 13 + 1;
+		apple_y = rand() % 18 + 1;
+	};
+
+	void appleLocation() {
+		apple_x = rand() % 13 + 1;
+		apple_y = rand() % 18 + 1;
+
+	};
+};
+
+
+
 int x = 6;
 int y = 6;
-int nmin = 0;
-int apple_x = 10;
-int apple_y = 10; 
+int nmin = 0; 
 int score = 0;
 
-void appleLocation() {
+/*void appleLocation() {
 	apple_x = rand() % 13 + 1;
 	apple_y = rand() % 18 + 1;
 
-};
+}; */
 
-void board();
+void board(Apple& a1);
 
 int main() {
 	bool Game_Runnning;
 	char input;
+	Apple a1; 
 
 	cout << "Press any button to start!";
 	cin.ignore();
@@ -42,9 +75,9 @@ int main() {
 	system("CLS");
 
 	srand(time(NULL));
-	appleLocation(); 
+	//appleLocation(); 
 
-	board();
+	board(a1);
 
 	while (Game_Runnning == true) {
 		cin >> input;
@@ -84,13 +117,16 @@ int main() {
 			}
 		}
 
-		board();
-
+		board(a1);
+		ofstream fout("Results.txt");
+		fout << "Your score is: " << score << endl;
+		fout.close();
+	
 	}
-	return 0;
+	
 }
 
-void board() {
+void board(Apple& a1) {
 	system("CLS");
 
 	cout << "Score: " << score << endl; 
@@ -102,7 +138,7 @@ void board() {
 			if (i == y && j == x) {
 				cout << 'S';
 			}
-			else if (i == apple_x && j == apple_y) {
+			else if (i == a1.getApple_X() && j == a1.getApple_Y()) {
 				cout << "O";
 
 			}
@@ -115,9 +151,12 @@ void board() {
 		cout << '|' << endl;
 	}
 	cout << "||||||||||||||||||||||" << endl;
-	if ((apple_x == y) && (apple_y == x)) {
+	if ((a1.getApple_X()  == y) && (a1.getApple_Y() == x)) {
 		cout << "You ate the apple" << endl;
 		score++; 
-		appleLocation();
+		a1.appleLocation();
 	}
+	
 }
+
+
