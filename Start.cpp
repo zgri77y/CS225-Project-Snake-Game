@@ -65,7 +65,7 @@ int main() {
 	Apple a1;
 
 	cout << "Press any button to start!";
-	cin.ignore();
+	_getch();
 	Game_Runnning = true;
 	system("CLS");
 
