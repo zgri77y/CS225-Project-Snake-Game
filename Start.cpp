@@ -9,7 +9,8 @@
 #include <climits>
 #include <time.h>
 #include <fstream>
-#include <iostream>
+#include <stdio.h>
+#include <conio.h>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -25,7 +26,7 @@ class Apple {
 
 private:
 	int apple_x = 10;
-	int apple_y = 10; 
+	int apple_y = 10;
 
 public:
 
@@ -53,15 +54,15 @@ public:
 
 int x = 6;
 int y = 6;
-int nmin = 0; 
+int nmin = 0;
 int score = 0;
 
 void board(Apple& a1);
 
 int main() {
 	bool Game_Runnning;
-	char input;
-	Apple a1; 
+	int input;
+	Apple a1;
 
 	cout << "Press any button to start!";
 	cin.ignore();
@@ -73,7 +74,7 @@ int main() {
 	board(a1);
 
 	while (Game_Runnning == true) {
-		cin >> input;
+		input = _getch();
 
 		switch (input) {
 		case 'w':
@@ -114,16 +115,16 @@ int main() {
 		ofstream fout("Results.txt");
 		fout << "Your score is: " << score << endl;
 		fout.close();
-	
+
 	}
-	
+
 }
 
 void board(Apple& a1) {
 	system("CLS");
 
-	cout << "Score: " << score << endl; 
-	
+	cout << "Score: " << score << endl;
+
 	cout << "||||||||||||||||||||||" << endl;
 	for (int i = 0; i < 15; i++) {
 		cout << '|';
@@ -144,13 +145,10 @@ void board(Apple& a1) {
 		cout << '|' << endl;
 	}
 	cout << "||||||||||||||||||||||" << endl;
-	if ((a1.getApple_X()  == y) && (a1.getApple_Y() == x)) {
+	if ((a1.getApple_X() == y) && (a1.getApple_Y() == x)) {
 		cout << "You ate the apple" << endl;
-		score++; 
+		score++;
 		a1.appleLocation();
 	}
-	
+
 }
-
-
-
