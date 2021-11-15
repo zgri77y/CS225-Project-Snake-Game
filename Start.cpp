@@ -120,7 +120,7 @@ int main() {
 		fout << "Your score is: " << score << endl;
 		fout.close();
 
-		if (BdX[0] <= 0 || BdX[0] >= 19 || BdY[0] <= 0 || BdY[0] >= 14 || hitBody == true) { Game_Runnning = false; }
+		if (BdX[0] < 0 || BdX[0] > 19 || BdY[0] < 0 || BdY[0] > 14 || hitBody == true) { Game_Runnning = false; }
 	}
 	system("CLS");
 
@@ -155,7 +155,7 @@ void board(Apple& a1, Snake& CPPSnake) {
 		cout << '|';
 		for (int j = 0; j < 20; j++) {
 
-			for (int l = Move; l > (Move-score); l--) {
+			for (int l = Move; l > (Move - score); l--) {
 				if (i == BdY[l] && j == BdX[l]) {
 					cout << 'o';
 					prB = true;
@@ -202,7 +202,7 @@ Snake::Snake() {
 }
 
 void Snake::MoveUp() {
-	if (y > 0 && Down == false) {
+	if (Down == false) {
 		Move++;
 		BdX[Move] = x;
 		BdY[Move] = y;
@@ -217,11 +217,11 @@ void Snake::MoveUp() {
 }
 
 void Snake::MoveDown() {
-	if (y < 14 && Up == false) {
+	if (Up == false) {
 		Move++;
 		BdX[Move] = x;
 		BdY[Move] = y;
-		
+
 		y = y + 1;
 
 		Up = false;
@@ -233,7 +233,7 @@ void Snake::MoveDown() {
 }
 
 void Snake::MoveLeft() {
-	if (x > 0 && Right == false) {
+	if (Right == false) {
 		Move++;
 		BdX[Move] = x;
 		BdY[Move] = y;
@@ -249,11 +249,11 @@ void Snake::MoveLeft() {
 }
 
 void Snake::MoveRight() {
-	if (x < 19 && Left == false) {
+	if (Left == false) {
 		Move++;
 		BdX[Move] = x;
 		BdY[Move] = y;
-		
+
 		x = x + 1;
 
 		Up = false;
