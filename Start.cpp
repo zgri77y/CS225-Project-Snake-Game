@@ -73,6 +73,23 @@ public:
 	int GetX() { return x; }
 	int GetY() { return y; }
 	int GetMove() { return Move; }
+	int GetDirect() {
+		if (Up == true) {
+			return 1;
+		}
+		else if (Left == true) {
+			return 2;
+		}
+		else if (Down == true) {
+			return 3;
+		}
+		else if (Right == true) {
+			return 4;
+		}
+		else {
+			return 0;
+		}
+	}
 };
 
 int BdX[256];
@@ -86,6 +103,7 @@ int main() {
 	Apple a1;
 	Snake CPPSnake;
 	int score;
+	int Direct;
 
 	cout << "Press any button to start!";
 	_getch();
@@ -97,22 +115,45 @@ int main() {
 	board(a1, CPPSnake);
 
 	while (Game_Runnning == true) {
-		input = _getch();
-
-		switch (input) {
-		case 'w':
-			CPPSnake.MoveUp();
-			break;
-		case 'a':
-			CPPSnake.MoveLeft();
-			break;
-		case 's':
-			CPPSnake.MoveDown();
-			break;
-		case 'd':
-			CPPSnake.MoveRight();
-			break;
+		Sleep(300);
+		
+		try {
+			Direct = CPPSnake.GetDirect();
+			if (Direct == 0)
+				throw (Direct);
 		}
+		catch (int NewDirect) {
+			cout << "Direction Error" << endl;
+			Direct = 1;
+		}
+
+		if (_kbhit()) {
+			input = _getch();
+
+			switch (input) {
+			case 'w':
+				CPPSnake.MoveUp();
+				break;
+			case 'a':
+				CPPSnake.MoveLeft();
+				break;
+			case 's':
+				CPPSnake.MoveDown();
+				break;
+			case 'd':
+				CPPSnake.MoveRight();
+				break;
+			}
+		}
+		else if(Direct == 1)
+			CPPSnake.MoveUp();
+		else if (Direct == 2)
+			CPPSnake.MoveLeft();
+		else if (Direct == 3)
+			CPPSnake.MoveDown();
+		else if (Direct == 4)
+			CPPSnake.MoveRight();
+
 
 		board(a1, CPPSnake);
 		ofstream fout("Results.txt");
