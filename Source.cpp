@@ -22,7 +22,8 @@
 
 using namespace std;
 
-bool board(Apple& a1, Snake& CPPSnake);
+
+bool board(Apple& a1, Bonus& b1, Snake& CPPSnake);
 
 int main() {
 	bool Game_Runnning;
@@ -33,6 +34,7 @@ int main() {
 	int Direct;
 
 	Apple a1;
+	Bonus b1;
 	Snake CPPSnake;
 
 	cout << "Press any button to start!";
@@ -42,11 +44,11 @@ int main() {
 
 	srand(time(NULL));
 
-	board(a1, CPPSnake);
+	board(a1, b1, CPPSnake);
 
 	while (Game_Runnning == true) {
 		Sleep(300);
-		
+
 		try {
 			Direct = CPPSnake.GetDirect();
 			if (Direct == 0)
@@ -75,7 +77,7 @@ int main() {
 				break;
 			}
 		}
-		else if(Direct == 1)
+		else if (Direct == 1)
 			CPPSnake.MoveUp();
 		else if (Direct == 2)
 			CPPSnake.MoveLeft();
@@ -85,9 +87,9 @@ int main() {
 			CPPSnake.MoveRight();
 
 
-		hitBody = board(a1, CPPSnake);
+		hitBody = board(a1, b1, CPPSnake);
 		ofstream fout("Results.txt");
-		score = a1.GetScore();
+		score = b1.GetScore();
 		fout << "Your score is: " << score << endl;
 		fout.close();
 
@@ -98,7 +100,7 @@ int main() {
 	cout << CPPSnake;
 
 	ofstream fout("Results.txt");
-	score = a1.GetScore();
+	score = b1.GetScore();
 	fout << "Your score is: " << score << endl;
 	fout.close();
 
@@ -106,7 +108,7 @@ int main() {
 
 }
 
-bool board(Apple& a1, Snake& CPPSnake) {
+bool board(Apple& a1, Bonus& b1, Snake& CPPSnake) {
 	system("CLS");
 
 	int x = CPPSnake.GetX();
@@ -116,7 +118,7 @@ bool board(Apple& a1, Snake& CPPSnake) {
 	bool hitBody = false;
 	bool prB = false;
 
-	int score = a1.GetScore();
+	int score = b1.GetScore();
 	cout << "Score: " << score << endl;
 
 	CPPSnake.BdX[0] = x;
@@ -157,10 +159,14 @@ bool board(Apple& a1, Snake& CPPSnake) {
 
 	if ((a1.getApple_X() == y) && (a1.getApple_Y() == x)) {
 		cout << "You ate the apple" << endl;
-		a1.AddScore();
+		b1.AddScore();
 		a1.appleLocation();
+
+		if (rand() % 10 == 9) {
+			b1.bonusPoints();
+		}
+		
 	}
 
 	return hitBody;
 }
-
