@@ -75,9 +75,10 @@ public:
 	int GetMove() { return Move; }
 };
 
-char Direction[256];
+int BdX[256];
+int BdY[256];
 void board(Apple& a1, Snake& CPPSnake);
-
+bool hitBody = false;
 
 int main() {
 	bool Game_Runnning;
@@ -119,7 +120,18 @@ int main() {
 		fout << "Your score is: " << score << endl;
 		fout.close();
 
+		if (BdX[0] <= 0 || BdX[0] >= 19 || BdY[0] <= 0 || BdY[0] >= 14 || hitBody == true) { Game_Runnning = false; }
 	}
+	system("CLS");
+
+	cout << "Game Over" << endl;
+
+	ofstream fout("Results.txt");
+	score = a1.GetScore();
+	fout << "Your score is: " << score << endl;
+	fout.close();
+
+	return 0;
 
 }
 
@@ -135,41 +147,17 @@ void board(Apple& a1, Snake& CPPSnake) {
 	int score = a1.GetScore();
 	cout << "Score: " << score << endl;
 
-	int BdX[100];
-	int BdY[100];
-
 	BdX[0] = x;
 	BdY[0] = y;
-
-	for (int k = 1; k < score+1; k++) {
-		switch (Direction[Move - k]) {
-		case 'U':
-			BdY[k] = BdY[k - 1] + 1;
-			BdX[k] = BdX[k - 1];
-			break;
-		case 'D':
-			BdY[k] = BdY[k - 1] - 1;
-			BdX[k] = BdX[k - 1];
-			break;
-		case 'L':
-			BdX[k] = BdX[k - 1] + 1;
-			BdY[k] = BdY[k - 1];
-			break;
-		case 'R':
-			BdX[k] = BdX[k - 1] - 1;
-			BdY[k] = BdY[k - 1];
-			break;
-		}
-	}
 
 	cout << "||||||||||||||||||||||" << endl;
 	for (int i = 0; i < 15; i++) {
 		cout << '|';
 		for (int j = 0; j < 20; j++) {
 
-			for (int l = 1; l < score + 1; l++) {
+			for (int l = Move; l > (Move-score); l--) {
 				if (i == BdY[l] && j == BdX[l]) {
-					cout << 'B';
+					cout << 'o';
 					prB = true;
 				}
 			}
@@ -178,11 +166,13 @@ void board(Apple& a1, Snake& CPPSnake) {
 				cout << 'S';
 			}
 			else if (i == a1.getApple_X() && j == a1.getApple_Y() && prB == false) {
-				cout << "O";
-
+				cout << "A";
 			}
 			else if (prB == false) {
 				cout << ' ';
+			}
+			else if (i == BdY[0] && j == BdX[0] && prB == true) {
+				hitBody = true;
 			}
 
 			prB = false;
@@ -213,9 +203,11 @@ Snake::Snake() {
 
 void Snake::MoveUp() {
 	if (y > 0 && Down == false) {
-		y = y - 1;
 		Move++;
-		Direction[Move] = 'U';
+		BdX[Move] = x;
+		BdY[Move] = y;
+
+		y = y - 1;
 
 		Up = true;
 		Down = false;
@@ -226,9 +218,11 @@ void Snake::MoveUp() {
 
 void Snake::MoveDown() {
 	if (y < 14 && Up == false) {
-		y = y + 1;
 		Move++;
-		Direction[Move] = 'D';
+		BdX[Move] = x;
+		BdY[Move] = y;
+		
+		y = y + 1;
 
 		Up = false;
 		Down = true;
@@ -240,9 +234,11 @@ void Snake::MoveDown() {
 
 void Snake::MoveLeft() {
 	if (x > 0 && Right == false) {
-		x = x - 1;
 		Move++;
-		Direction[Move] = 'L';
+		BdX[Move] = x;
+		BdY[Move] = y;
+
+		x = x - 1;
 
 		Up = false;
 		Down = false;
@@ -254,9 +250,11 @@ void Snake::MoveLeft() {
 
 void Snake::MoveRight() {
 	if (x < 19 && Left == false) {
-		x = x + 1;
 		Move++;
-		Direction[Move] = 'R';
+		BdX[Move] = x;
+		BdY[Move] = y;
+		
+		x = x + 1;
 
 		Up = false;
 		Down = false;
