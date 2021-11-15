@@ -90,7 +90,13 @@ public:
 			return 0;
 		}
 	}
+	friend ostream& operator<<(ostream& os, const Snake&);
 };
+
+ostream& operator<<(ostream& os, const Snake& s) {
+	os << "Game Over";
+	return os;
+}
 
 int BdX[256];
 int BdY[256];
@@ -165,7 +171,7 @@ int main() {
 	}
 	system("CLS");
 
-	cout << "Game Over" << endl;
+	cout << CPPSnake;
 
 	ofstream fout("Results.txt");
 	score = a1.GetScore();
