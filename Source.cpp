@@ -97,12 +97,14 @@ int main() {
 	}
 	system("CLS");
 
-	cout << CPPSnake;
-
 	ofstream fout("Results.txt");
 	score = b1.GetScore();
 	fout << "Your score is: " << score << endl;
 	fout.close();
+
+	cout << "Your score is: " << score << endl;
+
+	cout << CPPSnake;
 
 	return 0;
 
@@ -119,6 +121,7 @@ bool board(Apple& a1, Bonus& b1, Snake& CPPSnake) {
 	bool prB = false;
 
 	int score = b1.GetScore();
+	int scoreSnake = a1.GetScore();
 	cout << "Score: " << score << endl;
 
 	CPPSnake.BdX[0] = x;
@@ -129,7 +132,7 @@ bool board(Apple& a1, Bonus& b1, Snake& CPPSnake) {
 		cout << '|';
 		for (int j = 0; j < 20; j++) {
 
-			for (int l = Move; l > (Move - score); l--) {
+			for (int l = Move; l > (Move - scoreSnake); l--) {
 				if (i == CPPSnake.BdY[l] && j == CPPSnake.BdX[l]) {
 					cout << 'o';
 					prB = true;
@@ -159,6 +162,7 @@ bool board(Apple& a1, Bonus& b1, Snake& CPPSnake) {
 
 	if ((a1.getApple_X() == y) && (a1.getApple_Y() == x)) {
 		cout << "You ate the apple" << endl;
+		a1.AddScore();
 		b1.AddScore();
 		a1.appleLocation();
 
