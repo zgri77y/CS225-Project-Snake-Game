@@ -14,6 +14,7 @@ public:
 	int BdX[500];
 	int BdY[500];
 	Snake();
+	~Snake() {	cout << "Snake Gone" << endl;  }
 	void MoveUp();
 	void MoveDown();
 	void MoveLeft();

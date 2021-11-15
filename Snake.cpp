@@ -1,7 +1,7 @@
 #include "Snake.h"
 
 ostream& operator<<(ostream& os, const Snake& s) {
-	os << "Game Over";
+	os << "Game Over"<< endl;
 	return os;
 }
 
@@ -17,10 +17,7 @@ Snake::Snake() {
 
 void Snake::MoveUp() {
 	if (Down == false) {
-		if (Move < 500)
-			Move++;
-		else
-			Move = 1;
+		Move++;
 
 		BdX[Move] = x;
 		BdY[Move] = y;
@@ -36,10 +33,7 @@ void Snake::MoveUp() {
 
 void Snake::MoveDown() {
 	if (Up == false) {
-		if (Move < 500)
-			Move++;
-		else
-			Move = 1;
+		Move++;
 
 		BdX[Move] = x;
 		BdY[Move] = y;
@@ -56,10 +50,7 @@ void Snake::MoveDown() {
 
 void Snake::MoveLeft() {
 	if (Right == false) {
-		if (Move < 500)
-			Move++;
-		else
-			Move = 1;
+		Move++;
 
 		BdX[Move] = x;
 		BdY[Move] = y;
@@ -76,11 +67,8 @@ void Snake::MoveLeft() {
 
 void Snake::MoveRight() {
 	if (Left == false) {
-		if (Move < 500)
-			Move++;
-		else
-			Move = 1;
-		
+		Move++;
+
 		BdX[Move] = x;
 		BdY[Move] = y;
 

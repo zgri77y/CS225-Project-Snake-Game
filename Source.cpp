@@ -75,6 +75,15 @@ int main() {
 			case 'd':
 				CPPSnake.MoveRight();
 				break;
+			default:
+				if (Direct == 1)
+					CPPSnake.MoveUp();
+				else if (Direct == 2)
+					CPPSnake.MoveLeft();
+				else if (Direct == 3)
+					CPPSnake.MoveDown();
+				else if (Direct == 4)
+					CPPSnake.MoveRight();
 			}
 		}
 		else if (Direct == 1)
