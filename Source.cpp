@@ -31,8 +31,6 @@ int main() {
 	int input;
 	int score;
 	int Direct;
-	int BdX[500];
-	int BdY[500];
 
 	Apple a1;
 	Snake CPPSnake;
@@ -64,27 +62,27 @@ int main() {
 
 			switch (input) {
 			case 'w':
-				CPPSnake.MoveUp(BdX[500], BdY[500]);
+				CPPSnake.MoveUp();
 				break;
 			case 'a':
-				CPPSnake.MoveLeft(BdX[500], BdY[500]);
+				CPPSnake.MoveLeft();
 				break;
 			case 's':
-				CPPSnake.MoveDown(BdX[500], BdY[500]);
+				CPPSnake.MoveDown();
 				break;
 			case 'd':
-				CPPSnake.MoveRight(BdX[500], BdY[500]);
+				CPPSnake.MoveRight();
 				break;
 			}
 		}
 		else if(Direct == 1)
-			CPPSnake.MoveUp(BdX[500], BdY[500]);
+			CPPSnake.MoveUp();
 		else if (Direct == 2)
-			CPPSnake.MoveLeft(BdX[500], BdY[500]);
+			CPPSnake.MoveLeft();
 		else if (Direct == 3)
-			CPPSnake.MoveDown(BdX[500], BdY[500]);
+			CPPSnake.MoveDown();
 		else if (Direct == 4)
-			CPPSnake.MoveRight(BdX[500], BdY[500]);
+			CPPSnake.MoveRight();
 
 
 		hitBody = board(a1, CPPSnake);
@@ -93,7 +91,7 @@ int main() {
 		fout << "Your score is: " << score << endl;
 		fout.close();
 
-		if (BdX[0] < 0 || BdX[0] > 19 || BdY[0] < 0 || BdY[0] > 14 || hitBody == true) { Game_Runnning = false; }
+		if (CPPSnake.BdX[0] < 0 || CPPSnake.BdX[0] > 19 || CPPSnake.BdY[0] < 0 || CPPSnake.BdY[0] > 14 || hitBody == true) { Game_Runnning = false; }
 	}
 	system("CLS");
 
@@ -121,8 +119,8 @@ bool board(Apple& a1, Snake& CPPSnake) {
 	int score = a1.GetScore();
 	cout << "Score: " << score << endl;
 
-	BdX[0] = x;
-	BdY[0] = y;
+	CPPSnake.BdX[0] = x;
+	CPPSnake.BdY[0] = y;
 
 	cout << "||||||||||||||||||||||" << endl;
 	for (int i = 0; i < 15; i++) {
@@ -130,13 +128,13 @@ bool board(Apple& a1, Snake& CPPSnake) {
 		for (int j = 0; j < 20; j++) {
 
 			for (int l = Move; l > (Move - score); l--) {
-				if (i == BdY[l] && j == BdX[l]) {
+				if (i == CPPSnake.BdY[l] && j == CPPSnake.BdX[l]) {
 					cout << 'o';
 					prB = true;
 				}
 			}
 
-			if (i == BdY[0] && j == BdX[0] && prB == false) {
+			if (i == CPPSnake.BdY[0] && j == CPPSnake.BdX[0] && prB == false) {
 				cout << 'S';
 			}
 			else if (i == a1.getApple_X() && j == a1.getApple_Y() && prB == false) {
@@ -145,7 +143,7 @@ bool board(Apple& a1, Snake& CPPSnake) {
 			else if (prB == false) {
 				cout << ' ';
 			}
-			else if (i == BdY[0] && j == BdX[0] && prB == true) {
+			else if (i == CPPSnake.BdY[0] && j == CPPSnake.BdX[0] && prB == true) {
 				hitBody = true;
 			}
 

@@ -11,11 +11,13 @@ private:
 	int x = 6;
 	int y = 6;
 public:
+	int BdX[500];
+	int BdY[500];
 	Snake();
-	void MoveUp(int BdX[500], int BdY[500]);
-	void MoveDown(int BdX[500], int BdY[500]);
-	void MoveLeft(int BdX[500], int BdY[500]);
-	void MoveRight(int BdX[500], int BdY[500]);
+	void MoveUp();
+	void MoveDown();
+	void MoveLeft();
+	void MoveRight();
 	int GetX() { return x; }
 	int GetY() { return y; }
 	int GetMove() { return Move; }
