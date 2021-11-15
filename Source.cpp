@@ -22,16 +22,20 @@
 
 using namespace std;
 
-void board(Apple& a1, Snake& CPPSnake);
-bool hitBody = false;
+bool board(Apple& a1, Snake& CPPSnake);
 
 int main() {
 	bool Game_Runnning;
+	bool hitBody = false;
+
 	int input;
-	Apple a1;
-	Snake CPPSnake;
 	int score;
 	int Direct;
+	int BdX[500];
+	int BdY[500];
+
+	Apple a1;
+	Snake CPPSnake;
 
 	cout << "Press any button to start!";
 	_getch();
@@ -60,30 +64,30 @@ int main() {
 
 			switch (input) {
 			case 'w':
-				CPPSnake.MoveUp();
+				CPPSnake.MoveUp(BdX[500], BdY[500]);
 				break;
 			case 'a':
-				CPPSnake.MoveLeft();
+				CPPSnake.MoveLeft(BdX[500], BdY[500]);
 				break;
 			case 's':
-				CPPSnake.MoveDown();
+				CPPSnake.MoveDown(BdX[500], BdY[500]);
 				break;
 			case 'd':
-				CPPSnake.MoveRight();
+				CPPSnake.MoveRight(BdX[500], BdY[500]);
 				break;
 			}
 		}
 		else if(Direct == 1)
-			CPPSnake.MoveUp();
+			CPPSnake.MoveUp(BdX[500], BdY[500]);
 		else if (Direct == 2)
-			CPPSnake.MoveLeft();
+			CPPSnake.MoveLeft(BdX[500], BdY[500]);
 		else if (Direct == 3)
-			CPPSnake.MoveDown();
+			CPPSnake.MoveDown(BdX[500], BdY[500]);
 		else if (Direct == 4)
-			CPPSnake.MoveRight();
+			CPPSnake.MoveRight(BdX[500], BdY[500]);
 
 
-		board(a1, CPPSnake);
+		hitBody = board(a1, CPPSnake);
 		ofstream fout("Results.txt");
 		score = a1.GetScore();
 		fout << "Your score is: " << score << endl;
@@ -104,13 +108,14 @@ int main() {
 
 }
 
-void board(Apple& a1, Snake& CPPSnake) {
+bool board(Apple& a1, Snake& CPPSnake) {
 	system("CLS");
 
 	int x = CPPSnake.GetX();
 	int y = CPPSnake.GetY();
 	int Move = CPPSnake.GetMove();
 
+	bool hitBody = false;
 	bool prB = false;
 
 	int score = a1.GetScore();
@@ -158,5 +163,6 @@ void board(Apple& a1, Snake& CPPSnake) {
 		a1.appleLocation();
 	}
 
+	return hitBody;
 }
 

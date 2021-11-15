@@ -2,8 +2,7 @@
 #include <iostream>
 using namespace std;
 
-int BdX[256];
-int BdY[256];
+
 
 class Snake {
 private:
@@ -13,10 +12,10 @@ private:
 	int y = 6;
 public:
 	Snake();
-	void MoveUp();
-	void MoveDown();
-	void MoveLeft();
-	void MoveRight();
+	void MoveUp(int BdX[500], int BdY[500]);
+	void MoveDown(int BdX[500], int BdY[500]);
+	void MoveLeft(int BdX[500], int BdY[500]);
+	void MoveRight(int BdX[500], int BdY[500]);
 	int GetX() { return x; }
 	int GetY() { return y; }
 	int GetMove() { return Move; }

@@ -15,9 +15,13 @@ Snake::Snake() {
 	y = 6;
 }
 
-void Snake::MoveUp() {
+void Snake::MoveUp(int BdX[500], int BdY[500]) {
 	if (Down == false) {
-		Move++;
+		if (Move < 500)
+			Move++;
+		else
+			Move = 1;
+
 		BdX[Move] = x;
 		BdY[Move] = y;
 
@@ -30,9 +34,13 @@ void Snake::MoveUp() {
 	}
 }
 
-void Snake::MoveDown() {
+void Snake::MoveDown(int BdX[500], int BdY[500]) {
 	if (Up == false) {
-		Move++;
+		if (Move < 500)
+			Move++;
+		else
+			Move = 1;
+
 		BdX[Move] = x;
 		BdY[Move] = y;
 
@@ -46,9 +54,13 @@ void Snake::MoveDown() {
 
 }
 
-void Snake::MoveLeft() {
+void Snake::MoveLeft(int BdX[500], int BdY[500]) {
 	if (Right == false) {
-		Move++;
+		if (Move < 500)
+			Move++;
+		else
+			Move = 1;
+
 		BdX[Move] = x;
 		BdY[Move] = y;
 
@@ -62,9 +74,13 @@ void Snake::MoveLeft() {
 
 }
 
-void Snake::MoveRight() {
+void Snake::MoveRight(int BdX[500], int BdY[500]) {
 	if (Left == false) {
-		Move++;
+		if (Move < 500)
+			Move++;
+		else
+			Move = 1;
+		
 		BdX[Move] = x;
 		BdY[Move] = y;
 
